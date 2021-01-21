@@ -1,0 +1,103 @@
+<html>
+<head th:replace="~{base :: head}">
+</head>
+<body onload="onLoad()">
+<div th:replace="~{base :: logo}"></div>
+	<div class="container" id="dados">
+		<div th:replace="~{base :: titulo('Cadastrar')}"></div>
+		<nav th:replace="~{base :: navegacao}"></nav>
+
+		<div class="mt-3">			
+			    <div class="form-group">
+					<label for="cpf">CPF</label> 
+					<input v-model="pessoa.cpf" class="form-control" placeholder="cpf" /> 
+					<small class="form-text text-muted">Inserir CPF</small>
+				</div>
+			
+				<div class="form-group">
+					<label for="nome">Nome Completo</label> 
+					<input v-model="pessoa.nome" class="form-control" placeholder="nome completo" /> 
+					<small class="form-text text-muted">Inserir o nome completo</small>
+				</div>
+<!-- 				<div class="form-group"> -->
+<!-- 					<label for="dataNascimento">Data de Nascimento</label>  -->
+<!-- 					<input th:field="*{dataNascimento}" class="form-control"  placeholder="Data de Nascimento" />  -->
+<!-- 					<div th:errors="*{dataNascimento}"> -->
+<!-- 					</div> -->
+<!-- 					<small class="form-text text-muted">Inserir a data de nascimento do contato</small> -->
+<!-- 				</div> -->
+				<div class="form-group">
+					<label for="telefonePrincipal">Telefone Residencial</label> 
+					<input v-model="telefone.residencial" class="form-control" placeholder="Telefone principal" /> 
+					<small class="form-text text-muted">Inserir o telefone principal do contato</small>
+				</div>
+				<div class="form-group">
+					<label for="telefoneSecundario">Telefone Comercial</label> 
+					<input v-model="telefone.comercial" class="form-control" placeholder="Telefone secundario" /> 
+					<small class="form-text text-muted">Inserir o telefone comercial do contato</small>
+				</div>
+				<div class="form-group">
+					<label for="telefoneSecundario">Telefone Celular</label> 
+					<input v-model="telefone.celular" class="form-control" placeholder="Telefone secundario" /> 
+					<small class="form-text text-muted">Inserir o telefone celular do contato</small>
+				</div>
+				<div class="form-group">
+					<label for="email">Email</label> 
+					<input v-model="pessoa.email" class="form-control" placeholder="email" /> 
+					<small class="form-text text-muted">Inserir o email do contato</small>
+				</div>
+				<button v-if="pessoa.envioRealizado && telefone.envioRealizado" class="btn btn-success">Envio Realizado</button>
+				<button v-else v-on:click="novaPessoa(pessoa, telefone)" class="btn btn-primary">Cadastrar</button>
+				</div>
+			</div>				
+	<script>
+	
+		function onLoad(){
+			
+			var app = new Vue({ 
+				el: '#dados',
+				data: {
+					pessoa : {},
+			        telefone : {},
+					
+				},
+				mounted () {
+					axios
+						.get("http://localhost:8080/api/pessoa/novocadastro")
+						.then(response =>{
+							this.telefone = response.data.telefoneDTO;					
+							this.pessoa = response.data;
+						})	
+				},
+				methods: {
+					novaPessoa: function(pessoa, telefone){
+						axios
+						.post("http://localhost:8080/api/pessoa/cadastrar", 
+								{
+									pessoaCpf: pessoa.cpf,
+									pessoaNome: pessoa.nome,
+									pessoaEmail: pessoa.email,
+									pessoaTelefoneResidencial: telefone.residencial,
+									pessoaTelefoneComercial: telefone.comercial,
+									pessoaTelefoneCelular: telefone.celular
+								})
+						.then(response => { this.pessoa.envioRealizado = true;
+							this.telefone.envioRealizado = true;
+							window.location.href = "http://localhost:8080/pessoa/novo";
+							})						
+					},
+					
+				}
+				
+			});
+			
+			
+			
+		}
+	
+	</script>		
+		
+	<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>	
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<html>
+<head th:replace="~{base :: head}">
+
+</head>
+<body onload="onLoad()">
+
+	<div th:replace="~{base :: logo}"></div>
+
+	<div class="container" id="listaPessoas">
+
+		<div th:replace="~{base :: titulo('Home')}"></div>
+
+		<nav th:replace="~{base :: navegacao}"></nav>
+
+		<div class="card mb-3" v-for="pessoa in pessoas">
+				<div class="card-header alert-dark">
+
+					<div class=" row justify-content-between">
+						<div class="nav-item">
+							<a class="nav-item" :href="'pessoa/detalhes/' + pessoa.cpf"> <span>{{pessoa.nome}}</span>
+							</a>
+						</div>
+
+
+						<div class="nav-item ml-5">
+							<a> Alterar </a>
+						</div>
+					</div>
+				</div>
+
+				
+
+			<div class="card-body">
+				<div class="row">
+					<div class="col-8">
+						<div>
+							CPF: <span>{{pessoa.cpf}}</span>
+						</div>
+						<div>
+							telefone residencial: <span>{{pessoa.telefoneDTO.residencial}}</span>
+						</div>
+						<div>
+							telefone comercial: <span>{{pessoa.telefoneDTO.comercial}}</span>
+						</div>
+						<div>
+							telefone celular: <span>{{pessoa.telefoneDTO.celular}}</span>
+						</div>
+						<div>
+							email: <span>{{pessoa.email}}</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script>
+	
+	function onLoad(){
+		
+		var app = new Vue({ 
+			el: '#listaPessoas',
+			data: {
+				pessoas : []
+			},
+			mounted () {
+				axios
+					.get("http://localhost:8080/api/pessoa")
+					.then(response => (this.pessoas = response.data))	
+			},		
+		});
+		
+	}
+	
+	</script>	
+	<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>	
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</body>
+</html>

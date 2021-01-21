@@ -1,0 +1,131 @@
+<html>
+<head th:replace="~{base :: head}">
+</head>
+<body>
+<div th:replace="~{base :: logo}"></div>
+	<div class="container">
+		<div th:replace="~{base :: titulo('Alterar')}"></div>
+		<nav th:replace="~{base :: navegacao}"></nav>
+
+		<div class="mt-3">
+			<form th:object="${requisicaoAlterarPessoa}" th:action="@{/pessoas/alterar}" method="post" enctype="multipart/form-data">
+				
+				<input type="hidden" th:value="${pessoa.cpf}" name="cpfPessoa" />
+				
+				
+				
+				<div class="form-group">
+					<label for="cpf">CPF</label> 
+					<span th:text="${pessoa.cpf}" class="form-control"/> 
+				</div>
+				
+				
+				
+				<div class="form-group">
+					<label for="nome">Nome Completo</label> 
+					<input  th:value="${pessoa.nome}" name="nomeAlterar" class="form-control" placeholder="nome completo" /> 
+					<div th:errors="*{nomeAlterar}">
+					</div>
+					<small class="form-text text-muted">Inserir o nome completo</small>
+				</div>
+				<div class="form-group">
+					<label for="cep">CEP</label> 
+					<input th:value="${pessoa.endereco.cep}" name="cepAlterar" class="form-control" placeholder="cep" /> 
+					<div th:errors="*{cepAlterar}">
+					</div>
+					<small class="form-text text-muted">Inserir o CEP da residencia do contato</small>
+				</div>
+				<div class="form-group">
+					<label for="logradouro">Logradouro</label> 
+					<input th:value="${pessoa.endereco.logradouro}" name="logradouroAlterar"	class="form-control"  placeholder="logradouro" />
+					<div th:errors="*{logradouroAlterar}">
+					</div>
+					<small class="form-text text-muted">Inserir o logradouro da
+						residencia do contato</small>
+				</div>
+				<div class="form-group">
+					<label for="numero">Numero</label> 
+					<input th:value="${pessoa.endereco.numero}" name="numeroAlterar" class="form-control" placeholder="numero" /> 
+					<div th:errors="*{numeroAlterar}">
+					</div>
+					<small class="form-text text-muted">Inserir o numero da residencia do contato</small>
+				</div>
+				<div class="form-group">
+					<label for="complemento">Complemento</label> 
+					<input th:value="${pessoa.endereco.complemento}" name="complementoAlterar" class="form-control" placeholder="complemento" />
+					<div th:errors="*{complementoAlterar}">
+					</div>
+					<small class="form-text text-muted">Inserir o complemento da residencia do contato</small>
+				</div>
+				<div class="form-group">
+					<label for="bairro">Bairro</label> 
+					<input th:value="${pessoa.endereco.bairro}" name="bairroAlterar" class="form-control"  placeholder="bairro" /> 
+					<div th:errors="*{bairroAlterar}">
+					</div>
+					<small class="form-text text-muted">Inserir o bairro da residencia do contato</small>
+				</div>
+				<div class="form-group">
+					<label for="cidade">Cidade</label> 
+					<input th:value="${pessoa.endereco.cidade}" name="cidadeAlterar" class="form-control" placeholder="cidade" /> 
+					<div th:errors="*{cidadeAlterar}">
+					</div>
+					<small class="form-text text-muted">Inserir o cidade da residencia do contato</small>
+				</div>
+				<div class="form-group">
+					<label for="dataNascimento">Data de Nascimento</label> 
+					<input th:value="${#temporals.format(pessoa.dataNascimento, 'dd/MM/yyyy')}" name="dataNascimentoAlterar" class="form-control"  placeholder="Data de Nascimento" /> 
+					<div th:errors="*{dataNascimentoAlterar}">
+					</div>
+					<small class="form-text text-muted">Inserir a data de nascimento do contato</small>
+				</div>
+				<div class="form-group">
+					<label for="nomeMae">Mãe</label> 
+					<input th:value="${pessoa.nomeMae}" name="nomeMaeAlterar" class="form-control" placeholder="Nome da Mae" /> 
+					<div th:errors="*{nomeMaeAlterar}">
+					</div>
+					<small class="form-text text-muted">Inserir o nome da mãe do contato</small>
+				</div>
+				<div class="form-group">
+					<label for="telefonePrincipal">Telefone 1</label> 
+					<input th:value="${pessoa.telefonePrincipal}" name="telefonePrincipalAlterar" class="form-control" placeholder="Telefone principal" /> 
+					<div th:errors="*{telefonePrincipalAlterar}">
+					</div>
+					<small class="form-text text-muted">Inserir o telefone principal do contato</small>
+				</div>
+				<div class="form-group">
+					<label for="telefoneSecundario">Telefone 2</label> 
+					<input th:value="${pessoa.telefoneSecundario}" name="telefoneSecundarioAlterar" class="form-control" placeholder="Telefone secundario" /> 
+					<div th:errors="*{telefoneSecundarioAlterar}">
+					</div>
+					<small class="form-text text-muted">Inserir o telefone secundário do contato</small>
+				</div>
+				<div class="form-group">
+					<label for="email">Email</label> 
+					<input th:value="${pessoa.email}" name="emailAlterar" class="form-control" placeholder="email" /> 
+					<div th:errors="*{emailAlterar}">
+					</div>
+					<small class="form-text text-muted">Inserir o email do contato</small>
+				</div>
+<!-- 				<div class="form-group"> -->
+<!-- 					<label for="Imagem">Imagem</label>  -->
+<!-- 					<input type="file" name="imagem" class="form-control-file" placeholder="Imagem" />  -->
+<!-- 					<small class="form-text text-muted">Inserir imagem do contato</small> -->
+<!-- 				</div> -->
+
+
+				<div class="mb-4">
+					Dados completos?
+					<select name="dadosCompletosOuIncompletosAlterar">
+						<option value="COMPLETOS">COMPLETOS</option>
+						<option value="INCOMPLETOS">INCOMPLETOS</option>				
+					</select>
+				</div>
+
+
+
+				<button type="submit" class="btn btn-primary">Alterar</button>
+			</form>
+		</div>
+	</div>
+</body>
+</html>
