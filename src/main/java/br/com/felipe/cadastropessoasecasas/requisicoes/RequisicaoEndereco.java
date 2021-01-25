@@ -4,74 +4,107 @@ import br.com.felipe.cadastropessoasecasas.model.Endereco;
 import br.com.felipe.cadastropessoasecasas.model.Uf;
 
 public class RequisicaoEndereco {
-	
-	private String logradouro;
-	private Integer numero;
-	private String complemento;
-	private String bairro;
+
 	private Integer cep;
-	private String cidade;
-	private String uf;
-	private Long pessoaId;
+	private String enderecoLogradouro;
+	private Integer enderecoNumero;
+	private String enderecoComplemento;
+	private String enderecoBairro;
+	private Integer enderecoCep;
+	private String enderecoCidade;
+	private String enderecoUf;
+	private Long pessoaCpf;
 	
-	public String getLogradouro() {
-		return logradouro;
-	}
-	public void setLogradouro(String logradouro) {
-		this.logradouro = logradouro;
-	}
-	public Integer getNumero() {
-		return numero;
-	}
-	public void setNumero(Integer numero) {
-		this.numero = numero;
-	}
-	public String getComplemento() {
-		return complemento;
-	}
-	public void setComplemento(String complemento) {
-		this.complemento = complemento;
-	}
-	public String getBairro() {
-		return bairro;
-	}
-	public void setBairro(String bairro) {
-		this.bairro = bairro;
-	}
+	
 	public Integer getCep() {
 		return cep;
 	}
 	public void setCep(Integer cep) {
 		this.cep = cep;
 	}
-	public String getCidade() {
-		return cidade;
+
+	public String getEnderecoLogradouro() {
+		return enderecoLogradouro;
 	}
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
+
+	public void setEnderecoLogradouro(String enderecoLogradouro) {
+		this.enderecoLogradouro = enderecoLogradouro;
 	}
-	public String getUf() {
-		return uf;
+
+	public Integer getEnderecoNumero() {
+		return enderecoNumero;
 	}
-	public void setUf(String uf) {
-		this.uf = uf;
+
+	public void setEnderecoNumero(Integer enderecoNumero) {
+		this.enderecoNumero = enderecoNumero;
 	}
-	public Long getPessoaId() {
-		return pessoaId;
+
+	public String getEnderecoComplemento() {
+		return enderecoComplemento;
 	}
-	public void setPessoaId(Long pessoaId) {
-		this.pessoaId = pessoaId;
+
+	public void setEnderecoComplemento(String enderecoComplemento) {
+		this.enderecoComplemento = enderecoComplemento;
 	}
+
+	public String getEnderecoBairro() {
+		return enderecoBairro;
+	}
+
+	public void setEnderecoBairro(String enderecoBairro) {
+		this.enderecoBairro = enderecoBairro;
+	}
+
+	public Integer getEnderecoCep() {
+		return enderecoCep;
+	}
+
+	public void setEnderecoCep(Integer enderecoCep) {
+		this.enderecoCep = enderecoCep;
+	}
+
+	public String getEnderecoCidade() {
+		return enderecoCidade;
+	}
+
+	public void setEnderecoCidade(String enderecoCidade) {
+		this.enderecoCidade = enderecoCidade;
+	}
+
+	public String getEnderecoUf() {
+		return enderecoUf;
+	}
+
+	public void setEnderecoUf(String enderecoUf) {
+		this.enderecoUf = enderecoUf;
+	}
+
+	public Long getPessoaCpf() {
+		return pessoaCpf;
+	}
+
+	public void setPessoaCpf(Long pessoaCpf) {
+		this.pessoaCpf = pessoaCpf;
+	}
+
 	public Endereco toEndereco() {
 		Endereco endereco = new Endereco();
-		endereco.setLogradouro(logradouro);
-		endereco.setNumero(numero);
-		endereco.setComplemento(complemento);
-		endereco.setBairro(bairro);
-		endereco.setCidade(cidade);
-		endereco.setCep(cep);
-		endereco.setUf(Uf.valueOf(uf));
+		endereco.setLogradouro(this.enderecoLogradouro);
+		endereco.setNumero(this.enderecoNumero);
+		endereco.setComplemento(this.enderecoComplemento);
+		endereco.setBairro(this.enderecoBairro);
+		endereco.setCidade(this.enderecoCidade);
+		endereco.setCep(this.enderecoCep);
+		endereco.setUf(Uf.valueOf(this.enderecoUf.toUpperCase()));
 		return endereco;
+	}
+
+	@Override
+	public String toString() {
+		return "RequisicaoEndereco [enderecoLogradouro=" + enderecoLogradouro + ", enderecoNumero=" + enderecoNumero
+				+ ", enderecoComplemento=" + enderecoComplemento + ", enderecoBairro=" + enderecoBairro
+				+ ", enderecoCep=" + enderecoCep + ", enderecoCidade=" + enderecoCidade + ", enderecoUf=" + enderecoUf
+				+ ", pessoaCpf=" + pessoaCpf + "]";
 	}
 	
 	

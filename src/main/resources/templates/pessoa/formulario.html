@@ -12,20 +12,17 @@
 					<label for="cpf">CPF</label> 
 					<input v-model="pessoa.cpf" class="form-control" placeholder="cpf" /> 
 					<small class="form-text text-muted">Inserir CPF</small>
-				</div>
-			
+				</div>			
 				<div class="form-group">
-					<label for="nome">Nome Completo</label> 
-					<input v-model="pessoa.nome" class="form-control" placeholder="nome completo" /> 
-					<small class="form-text text-muted">Inserir o nome completo</small>
+					<label for="nome">Nome</label> 
+					<input v-model="pessoa.nome" class="form-control" placeholder="nome" /> 
+					<small class="form-text text-muted">Inserir o nome da pessoa</small>
 				</div>
-<!-- 				<div class="form-group"> -->
-<!-- 					<label for="dataNascimento">Data de Nascimento</label>  -->
-<!-- 					<input th:field="*{dataNascimento}" class="form-control"  placeholder="Data de Nascimento" />  -->
-<!-- 					<div th:errors="*{dataNascimento}"> -->
-<!-- 					</div> -->
-<!-- 					<small class="form-text text-muted">Inserir a data de nascimento do contato</small> -->
-<!-- 				</div> -->
+				<div class="form-group">
+					<label for="email">Email</label> 
+					<input v-model="pessoa.email" class="form-control"  placeholder="email" /> 
+					<small class="form-text text-muted">Inserir o email</small>
+				</div>
 				<div class="form-group">
 					<label for="telefonePrincipal">Telefone Residencial</label> 
 					<input v-model="telefone.residencial" class="form-control" placeholder="Telefone principal" /> 
@@ -40,11 +37,6 @@
 					<label for="telefoneSecundario">Telefone Celular</label> 
 					<input v-model="telefone.celular" class="form-control" placeholder="Telefone secundario" /> 
 					<small class="form-text text-muted">Inserir o telefone celular do contato</small>
-				</div>
-				<div class="form-group">
-					<label for="email">Email</label> 
-					<input v-model="pessoa.email" class="form-control" placeholder="email" /> 
-					<small class="form-text text-muted">Inserir o email do contato</small>
 				</div>
 				<button v-if="pessoa.envioRealizado && telefone.envioRealizado" class="btn btn-success">Envio Realizado</button>
 				<button v-else v-on:click="novaPessoa(pessoa, telefone)" class="btn btn-primary">Cadastrar</button>

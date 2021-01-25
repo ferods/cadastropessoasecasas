@@ -1,0 +1,102 @@
+<html>
+<head th:replace="~{base :: head}">
+</head>
+<body onload="onLoad()">
+<div th:replace="~{base :: logo}"></div>
+	<div class="container" id="dados">
+		<div th:replace="~{base :: titulo('Cadastrar')}"></div>
+		<nav th:replace="~{base :: navegacao}"></nav>
+
+		<div class="mt-3">		
+				<div class="form-group">
+					<label for="cep">CEP</label> 
+					<input v-model="endereco.cep" class="form-control" placeholder="cep" /> 
+					<small class="form-text text-muted">Inserir CEP</small>
+				</div>	
+			    <div class="form-group">
+					<label for="logradouro">Logradouro</label> 
+					<input v-model="endereco.logradouro" class="form-control" placeholder="logradouro" /> 
+					<small class="form-text text-muted">Inserir Logradouro</small>
+				</div>			
+				<div class="form-group">
+					<label for="numero">Numero</label> 
+					<input v-model="endereco.numero" class="form-control" placeholder="numero" /> 
+					<small class="form-text text-muted">Inserir o numero da residência</small>
+				</div>
+				<div class="form-group">
+					<label for="complemento">Complemento</label> 
+					<input v-model="endereco.complemento" class="form-control"  placeholder="complemento" /> 
+					<small class="form-text text-muted">Inserir o complemento</small>
+				</div>
+				<div class="form-group">
+					<label for="bairro">Bairro</label> 
+					<input v-model="endereco.bairro" class="form-control" placeholder="bairro" /> 
+					<small class="form-text text-muted">Inserir o bairro</small>
+				</div>
+				<div class="form-group">
+					<label for="cidade">Cidade</label> 
+					<input v-model="endereco.cidade" class="form-control" placeholder="cidade" /> 
+					<small class="form-text text-muted">Inserir a cidade</small>
+				</div>
+				<div class="form-group">
+					<label for="uf">UF</label> 
+					<input v-model="endereco.uf" class="form-control" placeholder="uf" /> 
+					<small class="form-text text-muted">Inserir o estado</small>
+				</div>
+				<div class="form-group">
+					<label for="cpf">CPF</label> 
+					<input v-model="endereco.pessoaCpf" class="form-control" placeholder="CPF" /> 
+					<small class="form-text text-muted">Inserir o CPF</small>
+				</div>
+				<button v-if="endereco.envioRealizado" class="btn btn-success">Envio Realizado</button>
+				<button v-else v-on:click="novoEndereco(endereco)" class="btn btn-primary">Cadastrar</button>
+				</div>
+			</div>				
+	<script>
+	
+		function onLoad(){
+			
+			var app = new Vue({ 
+				el: '#dados',
+				data: {
+					endereco : {},					
+				},
+				mounted () {
+					axios
+						.get("http://localhost:8080/api/endereco/paginacadastro")
+						.then(response =>{					
+							this.endereco = response.data;
+						})	
+				},
+				methods: {
+					novoEndereco: function(endereco){
+						axios
+						.post("http://localhost:8080/api/endereco", 
+								{
+									enderecoCep: endereco.cep,
+									enderecoLogradouro: endereco.logradouro,
+									enderecoNumero: endereco.numero,
+									enderecoComplemento: endereco.complemento,
+									enderecoCidade: endereco.cidade,
+									enderecoBairro: endereco.bairro,
+									enderecoUf: endereco.uf,
+									pessoaCpf: endereco.pessoaCpf
+								})
+						.then(response => { this.endereco.envioRealizado = true;
+							window.location.href = "http://localhost:8080/endereco/novo";
+							})						
+					}
+					
+				}
+				
+			});
+			
+			
+			
+		}
+	
+</script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</body>
+</html>

@@ -20,7 +20,7 @@ public class Endereco {
 	private Integer cep;
 	private String cidade;
 	@Enumerated(EnumType.STRING)
-	private Uf uf = Uf.SP;
+	private Uf uf;
 	@ManyToOne
 	private Pessoa pessoa;
 	

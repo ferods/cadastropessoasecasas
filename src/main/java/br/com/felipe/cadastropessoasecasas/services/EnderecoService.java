@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import br.com.felipe.cadastropessoasecasas.dtos.EnderecoDTO;
 import br.com.felipe.cadastropessoasecasas.model.Endereco;
 import br.com.felipe.cadastropessoasecasas.model.Pessoa;
 import br.com.felipe.cadastropessoasecasas.repositories.PessoaRepository;
@@ -21,9 +22,11 @@ public class EnderecoService {
 	private PessoaRepository pessoaRepository;
 
 	@Transactional
-	public ResponseEntity<Endereco> salvarEndereco(RequisicaoEndereco requisicao, UriComponentsBuilder builder) {
+	public ResponseEntity<EnderecoDTO> salvarEndereco(RequisicaoEndereco requisicao, UriComponentsBuilder builder) {
 		
-		Optional<Pessoa> pessoaOpt = pessoaRepository.findById(requisicao.getPessoaId());	
+		System.out.println(requisicao);
+		
+		Optional<Pessoa> pessoaOpt = pessoaRepository.findById(requisicao.getPessoaCpf());	
 		
 		if(!pessoaOpt.isPresent()) {
 			return ResponseEntity.notFound().build();
@@ -36,7 +39,11 @@ public class EnderecoService {
 		pessoaRepository.save(pessoa);
 		
 		URI uri = builder.path("/api/endereco/id").buildAndExpand(endereco.getId()).toUri();
-		return ResponseEntity.created(uri).body(endereco);
+		return ResponseEntity.created(uri).body(new EnderecoDTO(endereco));
+	}
+
+	public EnderecoDTO getEnderecoDTO() {
+		return new EnderecoDTO();
 	}
 	
 	

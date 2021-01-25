@@ -31,14 +31,19 @@
 <nav th:fragment="navegacao"
 			class="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between mb-3">
 			<div class="navbar-nav">
-				<a class="nav-link active" href="/home"> Home </a> <a
-					class="nav-link" href="/home/completos">Completos</a> <a
-					class="nav-link" href="/home/incompletos">Incompletos</a>
+				<a class="nav-link active" href="/home"> Home </a> 
+				<a class="nav-link" href="/endereco/lista">Lista de Endereços</a>
 			</div>
+			<div>
 			<a href="/pessoa/novo">
 				<button type="button" class="btn btn-outline-secondary">
-					Novo</button>
+					Cadastrar Pessoas</button>
 			</a>
+			<a href="/endereco/novo">
+				<button type="button" class="btn btn-outline-secondary">
+					Cadastrar Enderecos</button>
+			</a>
+			</div>
 		</nav>
 
 
