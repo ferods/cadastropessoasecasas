@@ -12,5 +12,10 @@ public class EnderecoController {
 	public String formulario() {
 		return "endereco/formulario";
 	}
+	
+	@GetMapping("/lista")
+	public String getPaginaLista() {
+		return "endereco/lista";
+	}
 
 }

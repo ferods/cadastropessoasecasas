@@ -1,0 +1,82 @@
+<html>
+<head th:replace="~{base :: head}">
+
+</head>
+<body onload="onLoad()">
+
+	<div th:replace="~{base :: logo}"></div>
+
+	<div class="container" id="listaPessoas">
+
+		<div th:replace="~{base :: titulo('Endereços')}"></div>
+
+		<nav th:replace="~{base :: navegacao}"></nav>
+
+		<div class="card mb-3" v-for="endereco in enderecos">
+				<div class="card-header alert-dark">
+
+					<div class=" row justify-content-between">
+						<div class="nav-item">
+							<a class="nav-item" :href="'endereco/detalhes/' + endereco.id"> <span>{{endereco.logradouro}} {{endereco.numero}}</span>
+							</a>
+						</div>
+
+
+						<div class="nav-item ml-5">
+							<a> Alterar </a>
+						</div>
+					</div>
+				</div>
+
+				
+
+			<div class="card-body">
+				<div class="row">
+					<div class="col-8">
+						<div>
+							CEP: <span>{{endereco.cep}}</span>
+						</div>
+						<div>
+							Numero: <span>{{endereco.numero}}</span>
+						</div>
+						<div>
+							Complemento: <span>{{endereco.complemento}}</span>
+						</div>
+						<div>
+							Bairro: <span>{{endereco.bairro}}</span>
+						</div>
+						<div>
+							Cidade: <span>{{endereco.cidade}}</span>
+						</div>
+						<div>
+							UF: <span>{{endereco.uf}}</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script>
+	
+	function onLoad(){
+		
+		var app = new Vue({ 
+			el: '#listaPessoas',
+			data: {
+				enderecos : []
+			},
+			mounted () {
+				axios
+					.get("http://localhost:8080/api/endereco")
+					.then(response => (this.enderecos = response.data))	
+			},		
+		});
+		
+	}
+	
+	</script>	
+	<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>	
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</body>
+</html>

@@ -1,6 +1,7 @@
 package br.com.felipe.cadastropessoasecasas.services;
 
 import java.net.URI;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import br.com.felipe.cadastropessoasecasas.dtos.EnderecoDTO;
 import br.com.felipe.cadastropessoasecasas.model.Endereco;
 import br.com.felipe.cadastropessoasecasas.model.Pessoa;
+import br.com.felipe.cadastropessoasecasas.repositories.EnderecoRepository;
 import br.com.felipe.cadastropessoasecasas.repositories.PessoaRepository;
 import br.com.felipe.cadastropessoasecasas.requisicoes.RequisicaoEndereco;
 
@@ -20,6 +22,9 @@ public class EnderecoService {
 
 	@Autowired
 	private PessoaRepository pessoaRepository;
+	
+	@Autowired
+	private EnderecoRepository enderecoRepository;
 
 	@Transactional
 	public ResponseEntity<EnderecoDTO> salvarEndereco(RequisicaoEndereco requisicao, UriComponentsBuilder builder) {
@@ -44,6 +49,10 @@ public class EnderecoService {
 
 	public EnderecoDTO getEnderecoDTO() {
 		return new EnderecoDTO();
+	}
+
+	public List<EnderecoDTO> getListaEnderecoDTO() {		
+		return EnderecoDTO.converter(enderecoRepository.findAll());
 	}
 	
 	

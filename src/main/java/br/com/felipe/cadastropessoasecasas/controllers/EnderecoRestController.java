@@ -1,5 +1,7 @@
 package br.com.felipe.cadastropessoasecasas.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +22,11 @@ public class EnderecoRestController {
 	
 	@Autowired
 	private EnderecoService enderecoService;
+	
+	@GetMapping
+	private List<EnderecoDTO> getListaEnderecoDTO(){
+		return enderecoService.getListaEnderecoDTO();
+	}
 	
 	@GetMapping("/paginacadastro")
 	private EnderecoDTO getEnderecoDTO() {
