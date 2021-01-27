@@ -17,5 +17,10 @@ public class PessoaController {
 	public String formulario() {
 		return "pessoa/formulario";
 	}
+	
+	@GetMapping("/alterar/{id}")
+	public String formularioAlteracao() {
+		return "pessoa/formularioalteracao";
+	}
 
 }

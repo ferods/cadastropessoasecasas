@@ -6,7 +6,6 @@ import javax.persistence.Embeddable;
 public class Telefone {
 	
 	private String residencial;
-	private String comercial;
 	private String celular;
 	
 	public String getResidencial() {
@@ -14,12 +13,6 @@ public class Telefone {
 	}
 	public void setResidencial(String residencial) {
 		this.residencial = residencial;
-	}
-	public String getComercial() {
-		return comercial;
-	}
-	public void setComercial(String comercial) {
-		this.comercial = comercial;
 	}
 	public String getCelular() {
 		return celular;

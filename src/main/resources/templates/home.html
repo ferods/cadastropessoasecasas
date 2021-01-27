@@ -23,7 +23,7 @@
 
 
 						<div class="nav-item ml-5">
-							<a> Alterar </a>
+							<a :href="'pessoa/alterar/' + pessoa.cpf"> Alterar </a>
 						</div>
 					</div>
 				</div>
@@ -38,9 +38,6 @@
 						</div>
 						<div>
 							telefone residencial: <span>{{pessoa.telefoneDTO.residencial}}</span>
-						</div>
-						<div>
-							telefone comercial: <span>{{pessoa.telefoneDTO.comercial}}</span>
 						</div>
 						<div>
 							telefone celular: <span>{{pessoa.telefoneDTO.celular}}</span>

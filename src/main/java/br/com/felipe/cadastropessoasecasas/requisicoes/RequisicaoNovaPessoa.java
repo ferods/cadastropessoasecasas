@@ -9,7 +9,6 @@ public class RequisicaoNovaPessoa {
 	private String pessoaNome;
 	private String pessoaEmail;
 	private String pessoaTelefoneResidencial;
-	private String pessoaTelefoneComercial;
 	private String pessoaTelefoneCelular;
 	
 	
@@ -37,12 +36,6 @@ public class RequisicaoNovaPessoa {
 	public void setPessoaTelefoneResidencial(String pessoaTelefoneResidencial) {
 		this.pessoaTelefoneResidencial = pessoaTelefoneResidencial;
 	}
-	public String getPessoaTelefoneComercial() {
-		return pessoaTelefoneComercial;
-	}
-	public void setPessoaTelefoneComercial(String pessoaTelefoneComercial) {
-		this.pessoaTelefoneComercial = pessoaTelefoneComercial;
-	}
 	public String getPessoaTelefoneCelular() {
 		return pessoaTelefoneCelular;
 	}
@@ -57,7 +50,6 @@ public class RequisicaoNovaPessoa {
 		
 		Telefone telefone = new Telefone();
 		telefone.setResidencial(this.pessoaTelefoneResidencial);
-		telefone.setComercial(this.pessoaTelefoneComercial);
 		telefone.setCelular(this.pessoaTelefoneCelular);
 		
 		pessoa.setTelefone(telefone);
@@ -68,7 +60,7 @@ public class RequisicaoNovaPessoa {
 	public String toString() {
 		return "RequisicaoNovaPessoa [pessoaCpf=" + pessoaCpf + ", pessoaNome=" + pessoaNome + ", pessoaEmail="
 				+ pessoaEmail + ", pessoaTelefoneResidencial=" + pessoaTelefoneResidencial
-				+ ", pessoaTelefoneComercial=" + pessoaTelefoneComercial + ", pessoaTelefoneCelular="
+				 + ", pessoaTelefoneCelular="
 				+ pessoaTelefoneCelular + "]";
 	}
 	
