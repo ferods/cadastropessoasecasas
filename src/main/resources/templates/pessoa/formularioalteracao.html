@@ -1,9 +1,9 @@
 <html>
 <head th:replace="~{base :: head}">
 </head>
-<body>
+<body onload="onLoad()">
 <div th:replace="~{base :: logo}"></div>
-	<div class="container">
+	<div class="container" id="dados">
 		<div th:replace="~{base :: titulo('Alterar')}"></div>
 		<nav th:replace="~{base :: navegacao}"></nav>
 
@@ -11,34 +11,89 @@
 				
 				<div class="form-group">
 					<label for="cpf">CPF</label> 
-					<span v-model="pessoa.cpf" class="form-control" placeholder="cpf"/> 
+					<span class="form-control">{{pessoa.cpf}}</span> 
 				</div>
 				
 				
 				
 				<div class="form-group">
 					<label for="nome">Nome Completo</label> 
-					<input  v-model="pessoa.nome"class="form-control" placeholder="nome completo" /> 
+					<input  v-model="pessoa.nome"class="form-control" placeholder="nome completo"></input>
 					<small class="form-text text-muted">Inserir o nome completo</small>
 				</div>
 				<div class="form-group">
 					<label for="telefoneResidencial">Telefone Residencial</label> 
-					<input v-model="pessoa.residencial" class="form-control" placeholder="Telefone Residencial" /> 
+					<input v-model="telefone.residencial" class="form-control" placeholder="Telefone Residencial"></input>
 					<small class="form-text text-muted">Inserir o telefone residencial do contato</small>
 				</div>
 				<div class="form-group">
 					<label for="telefoneCelular">Telefone Celular</label> 
-					<input v-model="pessoa.celular" class="form-control" placeholder="Telefone secundario" /> 
+					<input v-model="telefone.celular" class="form-control" placeholder="Telefone secundario"></input>
 					<small class="form-text text-muted">Inserir o telefone secundário do contato</small>
 				</div>
 				<div class="form-group">
 					<label for="email">Email</label> 
-					<input v-model="pessoa.email" class="form-control" placeholder="email" /> 
+					<input v-model="pessoa.email" class="form-control" placeholder="email"></input>
 					<small class="form-text text-muted">Inserir o email do contato</small>
 				</div>
 
-				<button type="submit" class="btn btn-primary">Alterar</button>
+				<button v-if="pessoa.envioRealizado && telefone.envioRealizado" class="btn btn-success">Envio Realizado</button>
+				<button v-else v-on:click="enviarAlteracao(pessoa, telefone)" class="btn btn-primary">Cadastrar</button>
 		</div>
 	</div>
+	
+	<script>
+	
+	function onLoad(){
+		
+		var app = new Vue({ 
+			el: '#dados',
+			data: {
+				pessoa : {},	
+				telefone:{},			
+			},
+			mounted () {
+				axios
+					.get("http://localhost:8080/api/pessoa/" + obterUrl())
+					.then(response =>{						
+						this.pessoa = response.data;
+						this.telefone = response.data.telefoneDTO;
+						})	
+			},
+			
+			methods: {
+				enviarAlteracao: function(pessoa, telefone){
+					axios
+					.put("http://localhost:8080/api/pessoa/alterar", 
+							{
+								pessoaCpf: pessoa.cpf,
+								atualizarPessoaNome: pessoa.nome,
+								atualizarPessoaEmail: pessoa.email,
+								atualizarPessoaTelefoneResidencial: telefone.residencial,
+								atualizarPessoaTelefoneCelular: telefone.celular
+							})
+					.then(response => { this.pessoa.envioRealizado = true;
+						this.telefone.envioRealizado = true;
+						window.location.href = "http://localhost:8080/pessoa/detalhes/"  + obterUrl();
+						})						
+				}				
+			}
+			
+		});
+		
+	}	
+
+		 function obterUrl(){
+			var currentUrl = window.location.href;
+			var idCpf = currentUrl.split('/');
+			return idCpf[5]; 
+		}		 
+	
+</script>	
+	
+	<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>	
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	
+	
 </body>
 </html>

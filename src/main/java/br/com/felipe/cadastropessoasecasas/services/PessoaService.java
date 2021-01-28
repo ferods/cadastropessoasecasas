@@ -13,6 +13,7 @@ import br.com.felipe.cadastropessoasecasas.dtos.PessoaDetalhesDTO;
 import br.com.felipe.cadastropessoasecasas.dtos.TelefoneDTO;
 import br.com.felipe.cadastropessoasecasas.model.Pessoa;
 import br.com.felipe.cadastropessoasecasas.repositories.PessoaRepository;
+import br.com.felipe.cadastropessoasecasas.requisicoes.RequisicaoAlterarPessoa;
 import br.com.felipe.cadastropessoasecasas.requisicoes.RequisicaoNovaPessoa;
 
 @Service
@@ -54,6 +55,24 @@ public class PessoaService {
 		pessoaRepository.save(pessoa);
 		URI uri = builder.path("/api/pessoa/id").buildAndExpand(pessoa.getCpf()).toUri();
 		return ResponseEntity.created(uri).body(new PessoaDTO(pessoa));
+	}
+
+
+	public ResponseEntity<PessoaDTO> formularioAlterarPessoa(Long cpf) {
+		Optional<Pessoa> pessoaOpt = pessoaRepository.findById(cpf);
+		
+		if(!pessoaOpt.isPresent()) {
+			return ResponseEntity.notFound().build();
+		}
+		
+		return ResponseEntity.ok(new PessoaDTO(pessoaOpt.get()));
+	}
+
+
+	public ResponseEntity<PessoaDTO> alterar(RequisicaoAlterarPessoa requisicao) {
+		System.out.println(requisicao);
+		Pessoa pessoa = requisicao.alterar(pessoaRepository);		
+		return ResponseEntity.ok().body(new PessoaDTO(pessoa));
 	}
 
 }
