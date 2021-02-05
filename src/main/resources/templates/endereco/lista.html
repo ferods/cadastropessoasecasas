@@ -17,13 +17,7 @@
 
 					<div class=" row justify-content-between">
 						<div class="nav-item">
-							<a class="nav-item" :href="'endereco/detalhes/' + endereco.id"> <span>{{endereco.logradouro}} {{endereco.numero}}</span>
-							</a>
-						</div>
-
-
-						<div class="nav-item ml-5">
-							<a> Alterar </a>
+							<a class="nav-item" :href="'/enderecos/detalhes/' + endereco.id"> <span>{{endereco.logradouro}} {{endereco.numero}}</span></a>
 						</div>
 					</div>
 				</div>
@@ -68,7 +62,7 @@
 			},
 			mounted () {
 				axios
-					.get("http://localhost:8080/api/endereco")
+					.get("http://localhost:8080/api/enderecos")
 					.then(response => (this.enderecos = response.data))	
 			},		
 		});

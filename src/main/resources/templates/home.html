@@ -17,13 +17,13 @@
 
 					<div class=" row justify-content-between">
 						<div class="nav-item">
-							<a class="nav-item" :href="'pessoa/detalhes/' + pessoa.cpf"> <span>{{pessoa.nome}}</span>
+							<a class="nav-item" :href="'pessoas/detalhes/' + pessoa.cpf"> <span>{{pessoa.nome}}</span>
 							</a>
 						</div>
 
 
 						<div class="nav-item ml-5">
-							<a :href="'pessoa/alterar/' + pessoa.cpf"> Alterar </a>
+							<a :href="'pessoas/alterar/' + pessoa.cpf"> Alterar </a>
 						</div>
 					</div>
 				</div>
@@ -62,7 +62,7 @@
 			},
 			mounted () {
 				axios
-					.get("http://localhost:8080/api/pessoa")
+					.get("http://localhost:8080/api/pessoas")
 					.then(response => (this.pessoas = response.data))	
 			},		
 		});

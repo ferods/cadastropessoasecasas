@@ -4,7 +4,7 @@
 <body onload="onLoad()">
 <div th:replace="~{base :: logo}"></div>
 	<div class="container" id="dados">
-		<div th:replace="~{base :: titulo('Cadastrar')}"></div>
+		<div th:replace="~{base :: titulo('Alterar Endereco')}"></div>
 		<nav th:replace="~{base :: navegacao}"></nav>
 
 		<div class="mt-3">		
@@ -63,7 +63,7 @@
 				},
 				mounted () {
 					axios
-						.get("http://localhost:8080/api/endereco/paginacadastro")
+						.get("http://localhost:8080/api/enderecos/alterar/" +  getId())
 						.then(response =>{					
 							this.endereco = response.data;
 						})	
@@ -95,6 +95,11 @@
 			
 		}
 	
+		function getId(){
+			var currentUrl = window.location.href;
+			var idCpf = currentUrl.split('/');
+			return idCpf[5]; 
+		}		 
 </script>
 <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>

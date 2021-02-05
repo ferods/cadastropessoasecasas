@@ -50,7 +50,7 @@
 				},
 				mounted () {
 					axios
-						.get("http://localhost:8080/api/pessoa/novocadastro")
+						.get("http://localhost:8080/api/pessoas/novocadastro")
 						.then(response =>{
 							this.telefone = response.data.telefoneDTO;					
 							this.pessoa = response.data;
@@ -59,7 +59,7 @@
 				methods: {
 					novaPessoa: function(pessoa, telefone){
 						axios
-						.post("http://localhost:8080/api/pessoa/cadastrar", 
+						.post("http://localhost:8080/api/pessoas/cadastrar", 
 								{
 									pessoaCpf: pessoa.cpf,
 									pessoaNome: pessoa.nome,
@@ -69,7 +69,7 @@
 								})
 						.then(response => { this.pessoa.envioRealizado = true;
 							this.telefone.envioRealizado = true;
-							window.location.href = "http://localhost:8080/pessoa/novo";
+							window.location.href = "http://localhost:8080/pessoas/novo";
 							})						
 					},
 					

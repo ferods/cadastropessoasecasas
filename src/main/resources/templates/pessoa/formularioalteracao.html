@@ -54,7 +54,7 @@
 			},
 			mounted () {
 				axios
-					.get("http://localhost:8080/api/pessoa/" + obterUrl())
+					.get("http://localhost:8080/api/pessoas/" + obterId())
 					.then(response =>{						
 						this.pessoa = response.data;
 						this.telefone = response.data.telefoneDTO;
@@ -64,7 +64,7 @@
 			methods: {
 				enviarAlteracao: function(pessoa, telefone){
 					axios
-					.put("http://localhost:8080/api/pessoa/alterar", 
+					.put("http://localhost:8080/api/pessoas/alterar", 
 							{
 								pessoaCpf: pessoa.cpf,
 								atualizarPessoaNome: pessoa.nome,
@@ -74,7 +74,7 @@
 							})
 					.then(response => { this.pessoa.envioRealizado = true;
 						this.telefone.envioRealizado = true;
-						window.location.href = "http://localhost:8080/pessoa/detalhes/"  + obterUrl();
+						window.location.href = "http://localhost:8080/pessoas/detalhes/"  + obterId();
 						})						
 				}				
 			}
@@ -83,7 +83,7 @@
 		
 	}	
 
-		 function obterUrl(){
+		 function obterId(){
 			var currentUrl = window.location.href;
 			var idCpf = currentUrl.split('/');
 			return idCpf[5]; 

@@ -11,9 +11,9 @@
 	
 			<div class="card mb-3 ">
 				<div class="card-header ">
-					<a>
-				     Alterar
-			        </a>
+					<div class="nav-item ml-5">
+					  <a :href="'/pessoas/alterar/' + pessoa.cpf"> Alterar </a>
+					</div>
 			        <a href="#"	onclick="document.querySelector('#form-remover').submit()">Remover</a>
 				</div>
 				<div class="card-body">
@@ -42,11 +42,12 @@
 			
 			
 			<div class="card mb-3" v-for="endereco in enderecos">	
-			<div class="card-header ">
-					<a>
-				    Logradouro: <span>{{endereco.logradouro}}</span>
-			        </a>
-			        <a href="#"	onclick="document.querySelector('#form-remover').submit()">Remover</a>
+				<div class="card-header ">
+						<a :href="'/endereco/detalhes/' + endereco.id"><span>{{endereco.logradouro}}</span></a>
+				        <div class="nav-item ml-5">
+							<a :href="'/endereco/alterar/' + endereco.id"> Alterar </a>
+						</div>
+				        <a href="#"	onclick="document.querySelector('#form-remover').submit()">Remover</a>
 				</div>		
 				<div class="card-body">
 									<div>
@@ -83,7 +84,7 @@
 			},
 			mounted () {
 				axios
-					.get("http://localhost:8080/api/pessoa/" + obterUrl())
+					.get("http://localhost:8080/api/pessoas/" + obterUrl())
 					.then(response =>{						
 						this.pessoa = response.data;
 						this.telefone = response.data.telefoneDTO;

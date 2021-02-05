@@ -1,0 +1,111 @@
+<html>
+<head th:replace="~{base :: head}">
+</head>
+<body onload="onLoad()">
+<div th:replace="~{base :: logo}"></div>
+   <div class="container" id="detalhes">
+		
+		<div th:replace="~{base :: titulo('{{endereco.logradouro}}')}"></div>
+
+		<nav th:replace="~{base :: navegacao}"></nav>
+		
+		
+		<div class="card mb-3">	
+				<div class="card-header ">
+				        <div class="nav-item ml-5">
+							<a :href="'/enderecos/alterar/' + endereco.id"> Alterar </a>
+						</div>
+				        <a href="#"	onclick="document.querySelector('#form-remover').submit()">Remover</a>
+				</div>		
+				<div class="card-body">
+									<div>
+										CEP: <span>{{endereco.cep}}</span>
+									</div>
+									<div class="col-7">
+										Numero: <span>{{endereco.numero}}</span>
+									</div>
+									<div>
+										Complemento: <span>{{endereco.complemento}}</span>
+									</div>
+	
+									<div>
+										Cidade: <span>{{endereco.cidade}}</span>
+									</div>
+									<div>
+										Bairro: <span>{{endereco.bairro}}</span>
+									</div>
+									<div>
+										UF: <span>{{endereco.uf}}</span>
+									</div>
+				</div>			
+			</div>				
+		
+	
+			<div class="card mb-3 ">
+				<div class="card-header ">
+				
+							<div>
+								<span>{{pessoa.nome}}</span>
+							</div>					
+				
+				</div>
+				<div class="card-body">
+					<div class="row">
+						<div class="col-8">
+							
+							<div>
+								Residencial: <span>{{telefone.residencial}}</span>
+							</div>
+							<div>
+								Celular: <span>{{telefone.celular}}</span>
+							</div>							
+							<div>
+								Email: <span>{{pessoa.email}}</span>
+							</div>
+
+						</div>
+
+					</div>
+				</div>				
+			</div>			
+			
+	</div>
+
+<script>
+	
+	function onLoad(){
+		
+		var app = new Vue({ 
+			el: '#detalhes',
+			data: {
+				endereco: {},	
+				pessoa: {},
+				telefone: {}
+			},
+			mounted () {
+				axios
+					.get("http://localhost:8080/api/enderecos/" + obterId())
+					.then(response =>{						
+						this.endereco = response.data;
+						this.pessoa = response.data.pessoaDTO;
+						this.telefone = response.data.pessoaDTO.telefoneDTO;
+						})	
+			},
+			
+		});
+		
+	}	
+
+		 function obterId(){
+			var currentUrl = window.location.href;
+			var id = currentUrl.split('/');
+			return id[5]; 
+		}		 
+	
+</script>	
+	
+	<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>	
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+</body>
+</html>

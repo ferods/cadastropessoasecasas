@@ -20,7 +20,7 @@ import br.com.felipe.cadastropessoasecasas.requisicoes.RequisicaoNovaPessoa;
 import br.com.felipe.cadastropessoasecasas.services.PessoaService;
 
 @RestController 
-@RequestMapping("/api/pessoa")
+@RequestMapping("/api/pessoas")
 public class PessoaRestController {
 	
 	@Autowired

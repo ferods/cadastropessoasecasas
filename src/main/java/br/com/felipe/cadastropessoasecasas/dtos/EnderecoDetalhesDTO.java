@@ -5,10 +5,9 @@ import java.util.stream.Collectors;
 
 import br.com.felipe.cadastropessoasecasas.model.Endereco;
 
-public class EnderecoDTO {
-	
-	private Long id;
+public class EnderecoDetalhesDTO {
 
+	private Long id;
 	private String logradouro;
 	private Integer numero;
 	private String complemento;
@@ -16,10 +15,10 @@ public class EnderecoDTO {
 	private Integer cep;
 	private String cidade;
 	private String uf;
-	private Long pessoaCpf;
+	private PessoaDTO pessoaDTO;
 
-	public EnderecoDTO(Endereco endereco) {
-
+	public EnderecoDetalhesDTO(Endereco endereco) {
+		super();
 		this.id = endereco.getId();
 		this.logradouro = endereco.getLogradouro();
 		this.numero = endereco.getNumero();
@@ -28,18 +27,16 @@ public class EnderecoDTO {
 		this.cep = endereco.getCep();
 		this.cidade = endereco.getCidade();
 		this.uf = endereco.getUf().toString();
-	}
-
-	public EnderecoDTO() {
+		this.pessoaDTO = new PessoaDTO(endereco.getPessoa());
 	}
 	
 	public Long getId() {
 		return id;
 	}
-	
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
 
 	public String getLogradouro() {
 		return logradouro;
@@ -92,21 +89,21 @@ public class EnderecoDTO {
 	public String getUf() {
 		return uf;
 	}
-
 	public void setUf(String uf) {
 		this.uf = uf;
 	}
-
-	public Long getPessoaCpf() {
-		return pessoaCpf;
+	public PessoaDTO getPessoaDTO() {
+		return pessoaDTO;
+	}
+	public void setPessoaDTO(PessoaDTO pessoaDTO) {
+		this.pessoaDTO = pessoaDTO;
 	}
 
-	public void setPessoaCpf(Long pessoaCpf) {
-		this.pessoaCpf = pessoaCpf;
+	public static List<EnderecoDetalhesDTO> converter(List<Endereco> findAll) {
+		return findAll.stream().map(EnderecoDetalhesDTO :: new).collect(Collectors.toList());
 	}
+	
 
-	public static List<EnderecoDTO> converter(List<Endereco> enderecos) {
-		return enderecos.stream().map(EnderecoDTO::new).collect(Collectors.toList());
-	}
+	
 
 }
