@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -58,6 +59,14 @@ public class PessoaRestController {
 	@GetMapping("/alterar/{cpf}")
 	public ResponseEntity<PessoaDTO> formularioAlterarPessoa(@PathVariable Long cpf){
 		return pessoaService.formularioAlterarPessoa(cpf);
+	}
+	
+	//deletar pessoa
+	
+	@DeleteMapping("/remover/{cpf}")
+	public ResponseEntity<?> deletarPessoa(@PathVariable Long cpf){
+		System.out.println(cpf);
+		return pessoaService.deletarEndereco(cpf);		
 	}
 	
 	

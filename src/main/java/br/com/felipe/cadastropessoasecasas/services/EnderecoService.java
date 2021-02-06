@@ -17,6 +17,7 @@ import br.com.felipe.cadastropessoasecasas.model.Pessoa;
 import br.com.felipe.cadastropessoasecasas.repositories.EnderecoRepository;
 import br.com.felipe.cadastropessoasecasas.repositories.PessoaRepository;
 import br.com.felipe.cadastropessoasecasas.requisicoes.RequisicaoAlterarEndereco;
+import br.com.felipe.cadastropessoasecasas.requisicoes.RequisicaoCodigoChave;
 import br.com.felipe.cadastropessoasecasas.requisicoes.RequisicaoEndereco;
 
 @Service
@@ -72,6 +73,12 @@ public class EnderecoService {
 	public ResponseEntity<EnderecoDTO> alterar(RequisicaoAlterarEndereco requisicao) {
 		Endereco endereco = requisicao.alterar(enderecoRepository);
 		return ResponseEntity.ok(new EnderecoDTO(enderecoRepository.save(endereco)));
+	}
+
+	@Transactional
+	public ResponseEntity<?> deletarEndereco(Long id) {
+		enderecoRepository.deleteById(id);
+		return ResponseEntity.accepted().build();
 	}
 
 	

@@ -5,24 +5,21 @@
 <div th:replace="~{base :: logo}"></div>
    <div class="container" id="detalhes">
 		
-		<div th:replace="~{base :: titulo('{{endereco.logradouro}}')}"></div>
+		<div th:replace="~{base :: titulo('{{endereco.logradouro}} {{endereco.numero}}')}"></div>
 
 		<nav th:replace="~{base :: navegacao}"></nav>
 		
 		
 		<div class="card mb-3">	
-				<div class="card-header ">
-				        <div class="nav-item ml-5">
-							<a :href="'/enderecos/alterar/' + endereco.id"> Alterar </a>
-						</div>
-				        <a href="#"	onclick="document.querySelector('#form-remover').submit()">Remover</a>
+				<div class="card-header">
+					<div class=" row justify-content-between">					       
+					   <div><a :href="'/enderecos/alterar/' + endereco.id"> Alterar </a></div>						
+				       <div><a href="#"	onclick="document.querySelector('#form-remover').submit()">Remover</a></div>				        
+					</div>
 				</div>		
 				<div class="card-body">
 									<div>
 										CEP: <span>{{endereco.cep}}</span>
-									</div>
-									<div class="col-7">
-										Numero: <span>{{endereco.numero}}</span>
 									</div>
 									<div>
 										Complemento: <span>{{endereco.complemento}}</span>
@@ -42,12 +39,8 @@
 		
 	
 			<div class="card mb-3 ">
-				<div class="card-header ">
-				
-							<div>
-								<span>{{pessoa.nome}}</span>
-							</div>					
-				
+				<div class="card-header ">						
+					<span>{{pessoa.nome}}</span>												
 				</div>
 				<div class="card-body">
 					<div class="row">

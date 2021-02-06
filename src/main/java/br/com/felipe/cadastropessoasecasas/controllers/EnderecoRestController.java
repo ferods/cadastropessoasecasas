@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +20,7 @@ import br.com.felipe.cadastropessoasecasas.dtos.PessoaDTO;
 import br.com.felipe.cadastropessoasecasas.model.Endereco;
 import br.com.felipe.cadastropessoasecasas.requisicoes.RequisicaoAlterarEndereco;
 import br.com.felipe.cadastropessoasecasas.requisicoes.RequisicaoAlterarPessoa;
+import br.com.felipe.cadastropessoasecasas.requisicoes.RequisicaoCodigoChave;
 import br.com.felipe.cadastropessoasecasas.requisicoes.RequisicaoEndereco;
 import br.com.felipe.cadastropessoasecasas.services.EnderecoService;
 
@@ -59,6 +61,13 @@ public class EnderecoRestController {
 	@GetMapping("/alterar/{id}")
 	public ResponseEntity<EnderecoDTO> formularioAlterarPessoa(@PathVariable Long id){
 		return enderecoService.formularioAlterarEndereco(id);
+	}
+	
+	//metodos para deletar endereco
+	
+	@DeleteMapping("/remover/{id}")
+	public ResponseEntity<?> deletarEndereco(@PathVariable Long id){
+		return enderecoService.deletarEndereco(id);		
 	}
 
 }

@@ -77,4 +77,11 @@ public class PessoaService {
 		return ResponseEntity.ok().body(new PessoaDTO(pessoa));
 	}
 
+
+	@Transactional
+	public ResponseEntity<?> deletarEndereco(Long cpf) {
+		pessoaRepository.deleteById(cpf);
+		return ResponseEntity.accepted().build();
+	}
+
 }

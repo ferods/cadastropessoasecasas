@@ -86,6 +86,8 @@ public class RequisicaoAlterarEndereco {
 	}
 
 	public Endereco alterar(EnderecoRepository enderecoRepository) {
+		
+		System.out.println(this.enderecoId);
 
 		Optional<Endereco> findById = enderecoRepository.findById(this.enderecoId);
 

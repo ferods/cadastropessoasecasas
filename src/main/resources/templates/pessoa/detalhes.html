@@ -11,10 +11,10 @@
 	
 			<div class="card mb-3 ">
 				<div class="card-header ">
-					<div class="nav-item ml-5">
-					  <a :href="'/pessoas/alterar/' + pessoa.cpf"> Alterar </a>
-					</div>
-			        <a href="#"	onclick="document.querySelector('#form-remover').submit()">Remover</a>
+					<div class=" row justify-content-between">
+						<div><a :href="'/pessoas/alterar/' + pessoa.cpf"> Alterar </a></div>
+				        <div><a href="/home" v-on:click="removerPessoa(pessoa)">Remover</a></div>
+			        </div>
 				</div>
 				<div class="card-body">
 					<div class="row">
@@ -43,29 +43,28 @@
 			
 			<div class="card mb-3" v-for="endereco in enderecos">	
 				<div class="card-header ">
-						<a :href="'/endereco/detalhes/' + endereco.id"><span>{{endereco.logradouro}}</span></a>
-				        <div class="nav-item ml-5">
-							<a :href="'/endereco/alterar/' + endereco.id"> Alterar </a>
-						</div>
-				        <a href="#"	onclick="document.querySelector('#form-remover').submit()">Remover</a>
+					<div class=" row justify-content-between">
+						<div><a :href="'/enderecos/detalhes/' + endereco.id"><span>{{endereco.logradouro}} {{endereco.numero}}</span></a></div>
+				        <div>
+							<a :href="'/endereco/alterar/' + endereco.id"> Alterar </a>						
+					        <a :href="'/pessoas/detalhes/' + pessoa.cpf" v-on:click="removerEndereco(endereco)">Remover</a>
+				        </div>
+				     </div>
 				</div>		
 				<div class="card-body">
-									<div>
-										CEP: <span>{{endereco.cep}}</span>
-									</div>
-									<div class="col-7">
-										Numero: <span>{{endereco.numero}}</span>
-									</div>
-									<div>
-										Complemento: <span>{{endereco.complemento}}</span>
-									</div>
-	
-									<div>
-										Cidade: <span>{{endereco.cidade}}</span>
-									</div>
-									<div>
-										Bairro: <span>{{endereco.bairro}}</span>
-									</div>
+					<div>
+						CEP: <span>{{endereco.cep}}</span>
+					</div>
+					<div>
+						Complemento: <span>{{endereco.complemento}}</span>
+					</div>
+
+					<div>
+						Cidade: <span>{{endereco.cidade}}</span>
+					</div>
+					<div>
+						Bairro: <span>{{endereco.bairro}}</span>
+					</div>
 				</div>			
 			</div>			
 			
@@ -90,6 +89,19 @@
 						this.telefone = response.data.telefoneDTO;
 						this.enderecos = response.data.enderecosDTO})	
 			},
+			
+			methods: {
+				removerEndereco: function(endereco){
+					axios
+					.delete("http://localhost:8080/api/enderecos/remover/" + endereco.id)	
+				},
+				
+				removerPessoa: function(pessoa){
+					axios
+					.delete("http://localhost:8080/api/pessoas/remover/" + pessoa.cpf)	
+			}
+				
+			}
 			
 		});
 		

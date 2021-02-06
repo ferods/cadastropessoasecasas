@@ -22,8 +22,9 @@
 						</div>
 
 
-						<div class="nav-item ml-5">
+						<div>
 							<a :href="'pessoas/alterar/' + pessoa.cpf"> Alterar </a>
+							<a href="/home" v-on:click="removerPessoa(pessoa)">Remover</a>
 						</div>
 					</div>
 				</div>
@@ -64,7 +65,14 @@
 				axios
 					.get("http://localhost:8080/api/pessoas")
 					.then(response => (this.pessoas = response.data))	
-			},		
+			},	
+			methods: {				
+				removerPessoa: function(pessoa){
+					axios
+					.delete("http://localhost:8080/api/pessoas/remover/" + pessoa.cpf)	
+				}
+				
+			}
 		});
 		
 	}
