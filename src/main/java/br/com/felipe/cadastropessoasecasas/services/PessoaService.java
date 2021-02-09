@@ -50,11 +50,9 @@ public class PessoaService {
 
 
 	public ResponseEntity<PessoaDTO> cadastrar(RequisicaoNovaPessoa requisicao, UriComponentsBuilder builder) {
-		System.out.println(requisicao);
 		Pessoa pessoa = requisicao.toPessoa();	
-		System.out.println(pessoa);
 		pessoaRepository.save(pessoa);
-		URI uri = builder.path("/api/pessoa/id").buildAndExpand(pessoa.getCpf()).toUri();
+		URI uri = builder.path("/api/pessoa/cpf").buildAndExpand(pessoa.getCpf()).toUri();
 		return ResponseEntity.created(uri).body(new PessoaDTO(pessoa));
 	}
 

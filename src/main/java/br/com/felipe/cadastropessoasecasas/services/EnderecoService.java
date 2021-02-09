@@ -32,8 +32,6 @@ public class EnderecoService {
 	@Transactional
 	public ResponseEntity<EnderecoDTO> salvarEndereco(RequisicaoEndereco requisicao, UriComponentsBuilder builder) {
 		
-		System.out.println(requisicao);
-		
 		Optional<Pessoa> pessoaOpt = pessoaRepository.findById(requisicao.getPessoaCpf());	
 		
 		if(!pessoaOpt.isPresent()) return ResponseEntity.notFound().build();
