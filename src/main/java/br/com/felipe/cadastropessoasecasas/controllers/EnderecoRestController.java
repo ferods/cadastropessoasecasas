@@ -16,11 +16,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.felipe.cadastropessoasecasas.dtos.EnderecoDTO;
 import br.com.felipe.cadastropessoasecasas.dtos.EnderecoDetalhesDTO;
-import br.com.felipe.cadastropessoasecasas.dtos.PessoaDTO;
-import br.com.felipe.cadastropessoasecasas.model.Endereco;
 import br.com.felipe.cadastropessoasecasas.requisicoes.RequisicaoAlterarEndereco;
-import br.com.felipe.cadastropessoasecasas.requisicoes.RequisicaoAlterarPessoa;
-import br.com.felipe.cadastropessoasecasas.requisicoes.RequisicaoCodigoChave;
 import br.com.felipe.cadastropessoasecasas.requisicoes.RequisicaoEndereco;
 import br.com.felipe.cadastropessoasecasas.services.EnderecoService;
 
